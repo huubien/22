@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Spring MyEmployee</title>
+
+<!-- Bootstrap -->
+<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<!-- Custom style -->
+
+<link href="src/main/resources/static/style.css"
+	th:href="@{/css/style.css}" rel="stylesheet" />
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script th:src="@{/webjars/jquery/1.12.4/jquery.min.js}"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+</head>
+<body>
+
+	<div class="jumbotron text-center">
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Employee Manager</a>
+				</div>
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">New Employee</a></li>
+					<li><a href="#">Add</a></li>
+					<li><a href="#">Link</a></li>
+				</ul>
+
+			</div>
+		</nav>
+	</div>
+	<div class="container">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>No</th>
+					<th>Last Name</th>
+					<th>First Name</th>
+					<th>Phone</th>
+					<th>Email</th>
+					<th>Salary</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="emp : ${employees}">
+					<td th:text="${emp.id}"></td>
+					<td th:text="${emp.firstname}"></td>
+					<td th:text="${emp.lastname}"></td>
+					<td th:text="${emp.phone}"></td>
+					<td th:text="${emp.email}"></td>
+					<td th:text="${emp.salary}"></td>
+					<td>
+						<form th:method="DELETE"
+							th:action="@{/employees/{id}/delete(id=${emp.id})}">
+							<button type="submit">Deleteï½¤</button>
+						</form>
+					</td>
+					<td>
+						<form th:method="PUT" th:action="@{/employees/update}">
+							<button type="submit">Editï½¤</button>
+						</form>
+					</td>
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

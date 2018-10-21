@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<body>
+	
+		
+	
+			<div class="row">
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>No</th>
+							<th>Last Name</th>
+							<th>First Name</th>
+							<th>Phone</th>
+							<th>Email</th>
+							<th>Salary</th>
+							<th>Create</th>
+							<th>Edit</th>
+							<th>Delete</th>
+							
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="emp : ${employees}">
+						<td th:text="${emp.id}"></td>
+						<td th:text="${emp.firstname}"></td>
+							<td th:text="${emp.lastname}"></td>
+							<td th:text="${emp.phone}"></td>
+							<td th:text="${emp.email}"></td>
+							<td th:text="${emp.salary}"></td>
+							<td><a th:href="@{/employee/{id}/edit(id=${emp.id})}">Edit</a></td>
+							<td><a th:href="@{/employee/create}">Create</a></td>
+							<td><a th:href="@{/employee/{id}/delete(id=${emp.id})}">Delete</a></td>
+							
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+			
+
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+<body>
+    <nav th:replace="layout :: header"></nav>
+
+    <div class="container">
+        <div class="row">
+          <form action="#" th:action="@{/employee/save}" th:object="${employee}"
+           method="POST" novalidate="novalidate">>
+		    <input type="text" th:field="*{id}" />
+		    <div class="form-group">
+		        <label>Name</label> 
+		        <input type="text" class="form-control"
+		            th:field="*{firstname}" /> 
+		    </div>
+		      <div class="form-group">
+		        <label>Name</label> 
+		        <input type="text" class="form-control"
+		            th:field="*{lastname}" /> 
+		    </div>
+		      <div class="form-group">
+		        <label>Name</label> 
+		        <input type="text" class="form-control"
+		            th:field="*{phone}" /> 
+		    </div>
+		      <div class="form-group">
+		        <label>Name</label> 
+		        <input type="text" class="form-control"
+		            th:field="*{email}" /> 
+		    </div>
+		      <div class="form-group">
+		        <label>Name</label> 
+		        <input type="text" class="form-control"
+		            th:field="*{salary}" /> 
+		    </div>
+		    
+		    <button type="submit" class="btn btn-primary">Save</button>
+		</form>
+        </div>
+    </div><!-- /.container -->
+
+    <footer th:replace="layout :: footer"></footer>
+</body>
+</html>

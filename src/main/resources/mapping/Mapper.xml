@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.training.mapper.EmployeeMapper">
+
+
+	<select id="findAll" resultType="com.example.training.model.Employees">
+        SELECT
+        	id as id, 
+            firstname as firstname, 
+			lastname as lastname , 
+			birthdate as birthdate,
+			phone as phone,
+			email as email,
+			salary as salary
+        FROM employee
+     
+    </select>
+    
+    <insert id="save">
+        INSERT INTO employee (id,firstname, lastname, birthdate, phone, email, salary) VALUES (#{id}, #{firstname}, #{lastname},#{birthdate}, #{phone}, #{email}, #{salary})
+    </insert>
+    
+	<select id="find" resultType="com.example.training.model.Employees">
+	 SELECT
+        	id as id, 
+            firstname as firstname, 
+			lastname as lastname, 
+			birthdate as birthdate,
+			phone as phone,
+			email as email,
+			salary as salary
+		FROM employee WHERE ID = #{id} 
+	</select>
+  
+	<update id="update" parameterType="com.example.training.model.Employees">
+        UPDATE employee SET 
+	        firstname = #{firstname},
+	        lastname = #{lastname},
+	        birthdate = #{birthdate},
+	        phone = #{phone},
+	        email = #{email},
+	        salary = #{salary}
+        WHERE id = #{id}
+    </update>
+	
+	<delete id="delete" parameterType="Long">
+        DELETE FROM employees WHERE id = #{id}
+    </delete>
+
+</mapper>

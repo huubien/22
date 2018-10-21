@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Spring MyEmployee</title>
+
+<!-- Bootstrap -->
+<link th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<!-- Custom style -->
+
+<link href="src/main/resources/static/style.css"
+	th:href="@{/css/style.css}" rel="stylesheet" />
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script th:src="@{/webjars/jquery/1.12.4/jquery.min.js}"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+	
+	
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">My Employee</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" th:href="@{/employees}">Add Employee <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" action="#"	th:action="@{/employee/search}" method="GET">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"  name="id"/>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+	<div class="container">
+		<div class="container-fluid">
+	
+		<table class="table">
+			<thead>
+				<tr>
+					<th>No</th>
+					<th>Last Name</th>
+					<th>First Name</th>
+					<th>BirthDate</th>
+					<th>Phone</th>
+					<th>Email</th>
+					<th>Salary</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="emp : ${employees}">
+					<td th:text="${emp.id}"></td>
+					<td th:text="${emp.firstname}"></td>
+					<td th:text="${emp.lastname}"></td>
+					<td th:text="${emp.birthdate}"></td>
+					<td th:text="${emp.phone}"></td>
+					<td th:text="${emp.email}"></td>
+					<td th:text="${emp.salary}"></td>
+					<td><a th:href="@{/employees/{id}/delete(id=${emp.id})}"><span
+						class="btn btn-danger">Delete</span></a></td>
+					<td><a th:href="@{/employees/{id}/edit(id=${emp.id})}"><span
+						class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Edit</span></a></td>
+									
+				</tr>
+			</tbody>
+		</table>
+	
+<a th:href="@{/employees}" class="btn btn-success pull-left"  data-toggle="modal" data-target="#exampleModalCenter">
+				<span class="glyphicon glyphicon-plus"></span> Add new employee
+			</a>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form action="#" th:action="@{/employees/update}" th:object="${employee}"  >
+		    <input type="text" th:field="*{id}" />
+		    <div class="form-group">
+		        <label>Name</label> 
+		        <input type="text" class="form-control"
+		            th:field="*{firstname}" /> 
+		    </div>
+		      <div class="form-group">
+		        <label>Name</label> 
+		        <input type="text" class="form-control"
+		            th:field="*{lastname}" /> 
+		    </div>
+		     <div class="form-group">
+		        <label>Name</label> 
+		        <input type="date" class="form-control" 
+		            th:field="*{birthdate}" /> 
+		    </div>
+		      <div class="form-group">
+		        <label>Name</label> 
+		        <input type="text" class="form-control"
+		            th:field="*{phone}" /> 
+		    </div>
+		      <div class="form-group">
+		        <label>Name</label> 
+		        <input type="text" class="form-control"
+		            th:field="*{email}" /> 
+		    </div>
+		      <div class="form-group">
+		        <label>Name</label> 
+		        <input type="text" class="form-control"
+		            th:field="*{salary}" /> 
+		    </div>
+		    
+		    <button type="submit" class="btn btn-primary">Save</button>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</body>
+</html>
